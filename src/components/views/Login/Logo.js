@@ -23,13 +23,16 @@ class Logo extends Component {
         easing: Easing.easeOutCubic
       }),
     ]).start(() => {
-
+      this.props.showLogin();
     })
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={ 
+        this.props.orientation === 'portrait' 
+        ? styles.containerPortrait : styles.containerLandscape
+      }>
         <Animated.View style={{
             opacity: this.state.sellAnimate,
             top: this.state.sellAnimate.interpolate({
@@ -53,11 +56,17 @@ class Logo extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
-  container: {
+  containerPortrait: {
     flex: 1,
     flexDirection: 'row',
     marginTop: 50,
     maxHeight: 100
+  },
+  containerLandscape: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 20,
+    maxHeight: 50
   },
   sellText: {
     fontSize: 40,
